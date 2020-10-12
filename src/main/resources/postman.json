@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "e243c6b0-fda6-4ba6-a607-15c1bfab7091",
+		"name": "Java 11 Talk",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Java Cycle",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "john",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/java/cycle?version=23",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"java",
+						"cycle"
+					],
+					"query": [
+						{
+							"key": "version",
+							"value": "23"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Java Version",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/java/version?version=23\n",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"java",
+						"version"
+					],
+					"query": [
+						{
+							"key": "version",
+							"value": "23\n"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Java Version XML",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/java/version/xml?version=27",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"java",
+						"version",
+						"xml"
+					],
+					"query": [
+						{
+							"key": "version",
+							"value": "27"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Competences everywhere",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/competences/everywhere?id=200",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"competences",
+						"everywhere"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "john",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "1234",
+				"type": "string"
+			}
+		]
+	},
+	"protocolProfileBehavior": {}
+}

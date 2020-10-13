@@ -1,6 +1,9 @@
 package de.qsmq.java11introduction.model;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import java.time.LocalDate;
 
 @XmlRootElement(name = "java")

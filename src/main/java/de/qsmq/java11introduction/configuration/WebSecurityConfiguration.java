@@ -3,11 +3,9 @@ package de.qsmq.java11introduction.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,7 +15,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -36,51 +33,36 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     // In Memory userdetails manager
     @Bean
     public UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager userDetailsService = new InMemoryUserDetailsManager();
+        var userDetailsService = new InMemoryUserDetailsManager();
 
 
-        Resource resource = new ClassPathResource("users.txt");
+        var fileWithUsers = new ClassPathResource("users.txt");
         String content = "";
         try {
             content =
-                    readFileAsString(resource.getFile().getAbsolutePath());
+                    readFileAsString(fileWithUsers.getFile().getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
 
-        List<CustomUserDetail> userList =
+        var listOfUsersFromFile =
                 Stream.of(content.split(","))
                 .map(s -> s.split("/"))
                 .map(s -> new CustomUserDetail(s[0], s[1], s[2], s[3]))
                 .collect(Collectors.toList());
 
 
-        for (CustomUserDetail cu : userList) {
-            UserDetails u = User.withUsername(cu.getUsername())
-                    .password(cu.getPassword())
-                    .authorities(cu.getAuthorities())
-                    .roles(cu.getRoles())
+        for (var userFromFile : listOfUsersFromFile) {
+            var userDetails = User.withUsername(userFromFile.getUsername())
+                    .password(userFromFile.getPassword())
+                    .authorities(userFromFile.getAuthorities())
+                    .roles(userFromFile.getRoles())
                     .build();
 
-            userDetailsService.createUser(u);
+            userDetailsService.createUser(userDetails);
         }
-
-//        UserDetails u1 = User.withUsername("john")
-//                .password("1234")
-//                .authorities("READ")
-//                .roles("ADMIN")
-//                .build();
-//
-//        UserDetails u2 = User.withUsername("jane")
-//                .password("1234")
-//                .authorities("WRITE")
-//                .roles("MANAGER")
-//                .build();
-//
-//        userDetailsService.createUser(u1);
-//        userDetailsService.createUser(u2);
 
         return  userDetailsService;
     }

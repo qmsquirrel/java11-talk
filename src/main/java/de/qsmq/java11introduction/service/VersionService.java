@@ -20,7 +20,7 @@ public class VersionService {
     public JVersion getVersion(int version) {
         return javaStream()
                 // remove all versions lower than version
-                .filter(x -> ! (x.getVersion() < version))
+                .dropWhile(x -> x.getVersion() < version)
                 .findFirst()
                 .get();
     }
@@ -29,10 +29,10 @@ public class VersionService {
         JVersion version1 = getVersion(version);
         return javaStream()
                 // remove all versions with lover lts
-                .filter(x -> x.getLastLtsVersion() >= version1.getLastLtsVersion())
-                .limit(10)
+                .dropWhile(x -> x.getLastLtsVersion() < version1.getLastLtsVersion())
                 // only keep version until next lts
-                .filter(x -> x.getLastLtsVersion() == version1.getLastLtsVersion())
+                .takeWhile(x -> x.getLastLtsVersion() == version1.getLastLtsVersion())
+                .limit(10)
                 .collect(Collectors.toList());
     }
 

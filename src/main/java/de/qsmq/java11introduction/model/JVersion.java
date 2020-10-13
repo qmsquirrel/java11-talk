@@ -1,7 +1,5 @@
 package de.qsmq.java11introduction.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.xml.bind.annotation.*;
 import java.time.LocalDate;
 

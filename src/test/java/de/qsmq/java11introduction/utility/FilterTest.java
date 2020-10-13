@@ -2,6 +2,7 @@ package de.qsmq.java11introduction.utility;
 
 import org.junit.jupiter.api.Test;
 
+
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,14 +12,8 @@ class FilterTest {
 
     @Test
     void filterSet() {
-        Set<String> testSet = new HashSet<>();
-        Set<String> copyOfTestSet = Collections.unmodifiableSet(testSet);
-        testSet.add("A");
-        testSet.add("AB");
-        testSet.add("ABC");
-        testSet.add("ABCD");
-        testSet.add("ABCDE");
-        testSet.add("ABCDEF");
+        Set<String> testSet = Set.of("A", "AB", "ABC", "ABCD", "ABCDE", "ABCDEF");
+        Set<String> copyOfTestSet = Set.copyOf(testSet);
 
         Set<String> result = Filter.filterSet(testSet, s -> s.length() > 3);
         assertThat(result.size()).isEqualTo(3);
@@ -27,14 +22,8 @@ class FilterTest {
 
     @Test
     void filterList() {
-        List<String> testList = new ArrayList<>();
-        List<String> copyOfTestList = Collections.unmodifiableList(testList);
-        testList.add("A");
-        testList.add("AB");
-        testList.add("ABC");
-        testList.add("ABCD");
-        testList.add("ABCDE");
-        testList.add("ABCDEF");
+        List<String> testList = List.of("A", "AB", "ABC", "ABCD", "ABCDE", "ABCDEF");
+        List<String> copyOfTestList = List.copyOf(testList);
 
         List<String> result = Filter.filterList(testList, s -> s.length() > 3);
         assertThat(result.size()).isEqualTo(3);
@@ -43,14 +32,9 @@ class FilterTest {
 
     @Test
     void filterMapByKey() {
-        Map<String, Integer> testMap = new HashMap<>();
-        testMap.put("A", 1);
-        testMap.put("AB", 0);
-        testMap.put("ABC", 1);
-        testMap.put("ABCD", 0);
-        testMap.put("ABCDE", 1);
-        testMap.put("ABCDEF", 0);
-        Map<String, Integer> copyOfTestMap = Collections.unmodifiableMap(testMap);
+        Map<String, Integer> testMap = Map.of("A", 1, "AB", 0, "ABC", 1, "ABCD", 0,
+                "ABCDE", 1, "ABCDEF", 0);
+        Map<String, Integer> copyOfTestMap = Map.copyOf(testMap);
 
         Map<String, Integer> result = Filter.filterMapByKey(testMap, s -> s.length() > 3);
         assertThat(result.size()).isEqualTo(3);
@@ -59,14 +43,9 @@ class FilterTest {
 
     @Test
     void filterMapByValue() {
-        Map<String, Integer> testMap = new HashMap<>();
-        testMap.put("A", 1);
-        testMap.put("AB", 0);
-        testMap.put("ABC", 1);
-        testMap.put("ABCD", 0);
-        testMap.put("ABCDE", 1);
-        testMap.put("ABCDEF", 0);
-        Map<String, Integer> copyOfTestMap = Collections.unmodifiableMap(testMap);
+        Map<String, Integer> testMap = Map.of("A", 1, "AB", 0, "ABC", 1, "ABCD", 0,
+                "ABCDE", 1, "ABCDEF", 0);
+        Map<String, Integer> copyOfTestMap = Map.copyOf(testMap);
 
         Map<String, Integer> result = Filter.filterMapByValue(testMap, s -> s == 0);
         assertThat(result.size()).isEqualTo(3);
